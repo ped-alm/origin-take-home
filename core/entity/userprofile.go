@@ -3,8 +3,8 @@ package entity
 type MaritalStatus int
 
 const (
-	Married MaritalStatus = iota + 1
-	Single
+	Single MaritalStatus = iota
+	Married
 )
 
 type UserProfile struct {

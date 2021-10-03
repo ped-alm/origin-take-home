@@ -12,8 +12,8 @@ const (
 func (r MaritalRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.MaritalStatus == entity.Married {
-		riskProfile.Life = tweakRisk(riskProfile.Life, maritalAdd)
-		riskProfile.Disability = tweakRisk(riskProfile.Disability, maritalDeduct)
+		riskProfile.Life.Value += maritalAdd
+		riskProfile.Disability.Value += maritalDeduct
 	}
 
 	return riskProfile

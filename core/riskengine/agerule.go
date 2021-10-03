@@ -19,15 +19,15 @@ func (r AgeRule) Execute(userProfile entity.UserProfile, riskProfile entity.Risk
 		riskProfile.Disability.Status = entity.Ineligible
 		riskProfile.Life.Status = entity.Ineligible
 	case userProfile.Age < youngAge:
-		riskProfile.House = tweakRisk(riskProfile.House, youngDeduct)
-		riskProfile.Auto = tweakRisk(riskProfile.Auto, youngDeduct)
-		riskProfile.Disability = tweakRisk(riskProfile.Disability, youngDeduct)
-		riskProfile.Life = tweakRisk(riskProfile.Life, youngDeduct)
+		riskProfile.House.Value += youngDeduct
+		riskProfile.Auto.Value += youngDeduct
+		riskProfile.Disability.Value += youngDeduct
+		riskProfile.Life.Value += youngDeduct
 	case userProfile.Age < averageAge:
-		riskProfile.House = tweakRisk(riskProfile.House, averageDeduct)
-		riskProfile.Auto = tweakRisk(riskProfile.Auto, averageDeduct)
-		riskProfile.Disability = tweakRisk(riskProfile.Disability, averageDeduct)
-		riskProfile.Life = tweakRisk(riskProfile.Life, averageDeduct)
+		riskProfile.House.Value += averageDeduct
+		riskProfile.Auto.Value += averageDeduct
+		riskProfile.Disability.Value += averageDeduct
+		riskProfile.Life.Value += averageDeduct
 	}
 
 	return riskProfile

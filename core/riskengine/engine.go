@@ -6,18 +6,7 @@ type Engine struct {
 	rules []RiskRule
 }
 
-func NewEngine() *Engine {
-	var rules = []RiskRule{
-		BaseScoreRule{},
-		AutoIneligibleRule{},
-		AgeRule{},
-		IncomeRule{},
-		HouseProfileRule{},
-		DependentsRule{},
-		MaritalRule{},
-		VehicleProfileRule{},
-	}
-
+func NewEngine(rules []RiskRule) *Engine {
 	return &Engine{rules}
 }
 
@@ -26,13 +15,17 @@ func (e *Engine) Execute(userProfile entity.UserProfile) entity.RiskProfile {
 
 	for _, rule := range e.rules {
 		riskProfile = rule.Execute(userProfile, riskProfile)
+
+		riskProfile.Disability = tweakRisk(riskProfile.Disability)
+		riskProfile.Auto = tweakRisk(riskProfile.Auto)
+		riskProfile.Life = tweakRisk(riskProfile.Life)
+		riskProfile.House = tweakRisk(riskProfile.House)
 	}
 
 	return riskProfile
 }
 
-func tweakRisk(risk entity.Risk, value int) entity.Risk {
-	risk.Value += value
+func tweakRisk(risk entity.Risk) entity.Risk {
 
 	switch {
 	case risk.Status == entity.Ineligible:

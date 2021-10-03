@@ -3,8 +3,8 @@ package entity
 type RiskStatus int
 
 const (
-	Ineligible RiskStatus = iota + 1
-	Economic
+	Economic RiskStatus = iota
+	Ineligible
 	Regular
 	Responsible
 )

@@ -3,8 +3,8 @@ package entity
 type HouseStatus int
 
 const (
-	HsOwned HouseStatus = iota + 1
-	HsNotOwned
+	HsNotOwned HouseStatus = iota
+	HsOwned
 	HsMortgaged
 )
 
