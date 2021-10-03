@@ -3,7 +3,7 @@ package entity
 type VehicleStatus int
 
 const (
-	VsOwned VehicleStatus = iota
+	VsOwned VehicleStatus = iota + 1
 	VsNotOwned
 )
 

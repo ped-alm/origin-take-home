@@ -3,16 +3,16 @@ package entity
 type MaritalStatus int
 
 const (
-	Married MaritalStatus = iota
+	Married MaritalStatus = iota + 1
 	Single
 )
 
 type UserProfile struct {
-	Age            uint8
-	Dependents     uint8
+	Age            int
+	Dependents     int
 	HouseProfile   HouseProfile
-	Income         uint64
+	Income         int64
 	MaritalStatus  MaritalStatus
-	RiskAnswers    []RiskQuestion
+	RiskQuestions  []RiskQuestion
 	VehicleProfile VehicleProfile
 }
