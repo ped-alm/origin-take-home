@@ -1,4 +1,4 @@
-package riskengine
+package basescore
 
 import (
 	"github.com/ped-alm/origin-take-home/core/entity"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestBaseScoreRule_Execute(t *testing.T) {
+func TestRule_Execute(t *testing.T) {
 
 	cases := []struct {
 		expectedValue int
@@ -73,7 +73,7 @@ func TestBaseScoreRule_Execute(t *testing.T) {
 				},
 			}}
 
-			received := BaseScoreRule{}.Execute(userProfile, entity.RiskProfile{})
+			received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 			expected := entity.RiskProfile{
 				Disability: entity.Risk{Value: c.expectedValue},

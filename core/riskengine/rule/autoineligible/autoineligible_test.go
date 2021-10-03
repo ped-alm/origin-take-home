@@ -1,4 +1,4 @@
-package riskengine
+package autoineligible
 
 import (
 	"github.com/ped-alm/origin-take-home/core/entity"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestAutoIneligibleRule_Execute(t *testing.T) {
+func TestRule_Execute(t *testing.T) {
 
 	t.Run("should return the correct risk profile when the user does not have income", func(t *testing.T) {
 		userProfile := entity.UserProfile{
@@ -19,7 +19,7 @@ func TestAutoIneligibleRule_Execute(t *testing.T) {
 			},
 		}
 
-		received := AutoIneligibleRule{}.Execute(userProfile, entity.RiskProfile{})
+		received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 		expected := entity.RiskProfile{
 			Disability: entity.Risk{Status: entity.Ineligible},
@@ -39,7 +39,7 @@ func TestAutoIneligibleRule_Execute(t *testing.T) {
 			},
 		}
 
-		received := AutoIneligibleRule{}.Execute(userProfile, entity.RiskProfile{})
+		received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 		expected := entity.RiskProfile{
 			Auto: entity.Risk{Status: entity.Ineligible},
@@ -59,7 +59,7 @@ func TestAutoIneligibleRule_Execute(t *testing.T) {
 			},
 		}
 
-		received := AutoIneligibleRule{}.Execute(userProfile, entity.RiskProfile{})
+		received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 		expected := entity.RiskProfile{
 			House: entity.Risk{Status: entity.Ineligible},
@@ -79,7 +79,7 @@ func TestAutoIneligibleRule_Execute(t *testing.T) {
 			},
 		}
 
-		received := AutoIneligibleRule{}.Execute(userProfile, entity.RiskProfile{})
+		received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 		expected := entity.RiskProfile{
 			Disability: entity.Risk{Status: entity.Ineligible},

@@ -1,4 +1,4 @@
-package riskengine
+package marital
 
 import (
 	"github.com/ped-alm/origin-take-home/core/entity"
@@ -6,11 +6,11 @@ import (
 	"testing"
 )
 
-func TestMaritalRule_Execute(t *testing.T) {
+func TestRule_Execute(t *testing.T) {
 
 	t.Run("should return the correct risk profile when the user is married", func(t *testing.T) {
 		userProfile := entity.UserProfile{MaritalStatus: entity.Married}
-		received := MaritalRule{}.Execute(userProfile, entity.RiskProfile{})
+		received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 		expected := entity.RiskProfile{
 			Disability: entity.Risk{Value: -1},

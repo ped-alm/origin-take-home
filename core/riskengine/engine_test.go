@@ -2,6 +2,15 @@ package riskengine
 
 import (
 	"github.com/ped-alm/origin-take-home/core/entity"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/age"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/autoineligible"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/basescore"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/dependents"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/houseprofile"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/income"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/marital"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule/vehicleprofile"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
@@ -181,15 +190,15 @@ func TestEngine_Execute(t *testing.T) {
 				},
 			}
 
-			engine := NewEngine([]RiskRule{
-				BaseScoreRule{},
-				AutoIneligibleRule{},
-				AgeRule{},
-				IncomeRule{},
-				HouseProfileRule{},
-				DependentsRule{},
-				MaritalRule{},
-				VehicleProfileRule{},
+			engine := NewEngine([]rule.Risk{
+				basescore.Rule{},
+				autoineligible.Rule{},
+				age.Rule{},
+				income.Rule{},
+				houseprofile.Rule{},
+				dependents.Rule{},
+				marital.Rule{},
+				vehicleprofile.Rule{},
 			})
 
 			received := engine.Execute(userProfile)

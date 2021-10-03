@@ -1,14 +1,14 @@
-package riskengine
+package dependents
 
 import "github.com/ped-alm/origin-take-home/core/entity"
 
-type DependentsRule struct{}
+type Rule struct{}
 
 const (
 	dependentsAdd = 1
 )
 
-func (r DependentsRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.Dependents > 0 {
 		riskProfile.Life.Value += dependentsAdd

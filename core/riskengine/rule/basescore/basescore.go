@@ -1,10 +1,10 @@
-package riskengine
+package basescore
 
 import "github.com/ped-alm/origin-take-home/core/entity"
 
-type BaseScoreRule struct{}
+type Rule struct{}
 
-func (r BaseScoreRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 	var score = 0
 
 	for _, question := range userProfile.RiskQuestions {

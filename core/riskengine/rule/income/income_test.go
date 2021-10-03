@@ -1,4 +1,4 @@
-package riskengine
+package income
 
 import (
 	"github.com/ped-alm/origin-take-home/core/entity"
@@ -6,11 +6,11 @@ import (
 	"testing"
 )
 
-func TestIncomeRule_Execute(t *testing.T) {
+func TestRule_Execute(t *testing.T) {
 
 	t.Run("should return the correct risk profile when the user has a high income", func(t *testing.T) {
 		userProfile := entity.UserProfile{Income: 20100000} //  $201.000,00
-		received := IncomeRule{}.Execute(userProfile, entity.RiskProfile{})
+		received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
 		expected := entity.RiskProfile{
 			Disability: entity.Risk{Value: -1},

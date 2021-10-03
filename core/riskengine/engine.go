@@ -1,20 +1,23 @@
 package riskengine
 
-import "github.com/ped-alm/origin-take-home/core/entity"
+import (
+	"github.com/ped-alm/origin-take-home/core/entity"
+	"github.com/ped-alm/origin-take-home/core/riskengine/rule"
+)
 
 type Engine struct {
-	rules []RiskRule
+	rules []rule.Risk
 }
 
-func NewEngine(rules []RiskRule) *Engine {
+func NewEngine(rules []rule.Risk) *Engine {
 	return &Engine{rules}
 }
 
 func (e *Engine) Execute(userProfile entity.UserProfile) entity.RiskProfile {
 	riskProfile := entity.RiskProfile{}
 
-	for _, rule := range e.rules {
-		riskProfile = rule.Execute(userProfile, riskProfile)
+	for _, r := range e.rules {
+		riskProfile = r.Execute(userProfile, riskProfile)
 
 		riskProfile.Disability = tweakRisk(riskProfile.Disability)
 		riskProfile.Auto = tweakRisk(riskProfile.Auto)

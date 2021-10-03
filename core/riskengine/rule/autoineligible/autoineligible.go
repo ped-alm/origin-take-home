@@ -1,10 +1,10 @@
-package riskengine
+package autoineligible
 
 import "github.com/ped-alm/origin-take-home/core/entity"
 
-type AutoIneligibleRule struct{}
+type Rule struct{}
 
-func (r AutoIneligibleRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.Income == 0 {
 		riskProfile.Disability.Status = entity.Ineligible
