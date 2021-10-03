@@ -7,15 +7,15 @@ type AutoIneligibleRule struct{}
 func (r AutoIneligibleRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.Income == 0 {
-		riskProfile.Disability.SetIneligible()
+		riskProfile.Disability.Status = entity.Ineligible
 	}
 
 	if userProfile.VehicleProfile.VehicleStatus == entity.VsNotOwned {
-		riskProfile.Auto.SetIneligible()
+		riskProfile.Auto.Status = entity.Ineligible
 	}
 
 	if userProfile.HouseProfile.HouseStatus == entity.HsNotOwned {
-		riskProfile.House.SetIneligible()
+		riskProfile.House.Status = entity.Ineligible
 	}
 
 	return riskProfile

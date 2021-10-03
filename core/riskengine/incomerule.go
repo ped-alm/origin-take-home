@@ -12,10 +12,10 @@ const (
 func (r IncomeRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.Income > highIncome {
-		riskProfile.House.AddValue(highIncomeDeduct)
-		riskProfile.Auto.AddValue(highIncomeDeduct)
-		riskProfile.Disability.AddValue(highIncomeDeduct)
-		riskProfile.Life.AddValue(highIncomeDeduct)
+		riskProfile.House = tweakRisk(riskProfile.House, highIncomeDeduct)
+		riskProfile.Auto = tweakRisk(riskProfile.Auto, highIncomeDeduct)
+		riskProfile.Disability = tweakRisk(riskProfile.Disability, highIncomeDeduct)
+		riskProfile.Life = tweakRisk(riskProfile.Life, highIncomeDeduct)
 	}
 
 	return riskProfile

@@ -30,3 +30,20 @@ func (e *Engine) Execute(userProfile entity.UserProfile) entity.RiskProfile {
 
 	return riskProfile
 }
+
+func tweakRisk(risk entity.Risk, value int) entity.Risk {
+	risk.Value += value
+
+	switch {
+	case risk.Status == entity.Ineligible:
+		return risk
+	case risk.Value <= 0:
+		risk.Status = entity.Economic
+	case risk.Value <= 2:
+		risk.Status = entity.Regular
+	default:
+		risk.Status = entity.Responsible
+	}
+
+	return risk
+}

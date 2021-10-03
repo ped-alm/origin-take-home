@@ -11,8 +11,8 @@ const (
 func (r DependentsRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.Dependents > 0 {
-		riskProfile.Life.AddValue(dependentsAdd)
-		riskProfile.Disability.AddValue(dependentsAdd)
+		riskProfile.Life = tweakRisk(riskProfile.Life, dependentsAdd)
+		riskProfile.Disability = tweakRisk(riskProfile.Disability, dependentsAdd)
 	}
 
 	return riskProfile

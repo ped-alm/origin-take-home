@@ -16,7 +16,7 @@ func (r VehicleProfileRule) Execute(userProfile entity.UserProfile, riskProfile 
 	newThresholdYear := time.Now().Year() - newVehicleThreshold
 
 	if userProfile.VehicleProfile.VehicleStatus == entity.VsOwned && userProfile.VehicleProfile.Year >= newThresholdYear {
-		riskProfile.Auto.AddValue(newVehicleAdd)
+		riskProfile.Auto = tweakRisk(riskProfile.Auto, newVehicleAdd)
 	}
 
 	return riskProfile

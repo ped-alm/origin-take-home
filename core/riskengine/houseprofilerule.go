@@ -11,8 +11,8 @@ const (
 func (r HouseProfileRule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.HouseProfile.HouseStatus == entity.HsMortgaged {
-		riskProfile.House.AddValue(mortgagedAdd)
-		riskProfile.Disability.AddValue(mortgagedAdd)
+		riskProfile.House = tweakRisk(riskProfile.House, mortgagedAdd)
+		riskProfile.Disability = tweakRisk(riskProfile.Disability, mortgagedAdd)
 	}
 
 	return riskProfile

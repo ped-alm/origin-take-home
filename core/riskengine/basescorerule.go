@@ -13,10 +13,10 @@ func (r BaseScoreRule) Execute(userProfile entity.UserProfile, riskProfile entit
 		}
 	}
 
-	riskProfile.House.AddValue(score)
-	riskProfile.Auto.AddValue(score)
-	riskProfile.Disability.AddValue(score)
-	riskProfile.Life.AddValue(score)
+	riskProfile.House = tweakRisk(riskProfile.House, score)
+	riskProfile.Auto = tweakRisk(riskProfile.Auto, score)
+	riskProfile.Disability = tweakRisk(riskProfile.Disability, score)
+	riskProfile.Life = tweakRisk(riskProfile.Life, score)
 
 	return riskProfile
 }
