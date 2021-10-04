@@ -1,7 +1,7 @@
 package riskengine
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
 	"github.com/ped-alm/origin-take-home/src/core/riskengine/rule"
 	"github.com/ped-alm/origin-take-home/src/core/riskengine/rule/age"
 	"github.com/ped-alm/origin-take-home/src/core/riskengine/rule/autoineligible"
@@ -21,170 +21,170 @@ func TestEngine_Execute(t *testing.T) {
 	cases := []struct {
 		age           int
 		dependents    int
-		houseStatus   entity2.HouseStatus
+		houseStatus   entity.HouseStatus
 		vehicleYear   int
 		income        int64
-		maritalStatus entity2.MaritalStatus
+		maritalStatus entity.MaritalStatus
 		answers       []bool
 		name          string
 
-		expectedDisability entity2.RiskStatus
-		expectedAuto       entity2.RiskStatus
-		expectedLife       entity2.RiskStatus
-		expectedHouse      entity2.RiskStatus
+		expectedDisability entity.RiskStatus
+		expectedAuto       entity.RiskStatus
+		expectedLife       entity.RiskStatus
+		expectedHouse      entity.RiskStatus
 	}{
 		{
 			age:           20,
 			dependents:    0,
-			houseStatus:   entity2.HsNotOwned,
+			houseStatus:   entity.HsNotOwned,
 			vehicleYear:   0,
 			income:        0,
-			maritalStatus: entity2.Single,
+			maritalStatus: entity.Single,
 			answers:       []bool{false, false, false},
 			name:          "case 0",
 
-			expectedDisability: entity2.Ineligible,
-			expectedAuto:       entity2.Ineligible,
-			expectedLife:       entity2.Economic,
-			expectedHouse:      entity2.Ineligible,
+			expectedDisability: entity.Ineligible,
+			expectedAuto:       entity.Ineligible,
+			expectedLife:       entity.Economic,
+			expectedHouse:      entity.Ineligible,
 		},
 		{
 			age:           35,
 			dependents:    2,
-			houseStatus:   entity2.HsOwned,
+			houseStatus:   entity.HsOwned,
 			vehicleYear:   time.Now().Year() - 10,
 			income:        25000000,
-			maritalStatus: entity2.Married,
+			maritalStatus: entity.Married,
 			answers:       []bool{false, false, true},
 			name:          "case 1",
 
-			expectedDisability: entity2.Economic,
-			expectedAuto:       entity2.Economic,
-			expectedLife:       entity2.Regular,
-			expectedHouse:      entity2.Economic,
+			expectedDisability: entity.Economic,
+			expectedAuto:       entity.Economic,
+			expectedLife:       entity.Regular,
+			expectedHouse:      entity.Economic,
 		},
 		{
 			age:           50,
 			dependents:    0,
-			houseStatus:   entity2.HsMortgaged,
+			houseStatus:   entity.HsMortgaged,
 			vehicleYear:   time.Now().Year(),
 			income:        17000000,
-			maritalStatus: entity2.Single,
+			maritalStatus: entity.Single,
 			answers:       []bool{false, true, false},
 			name:          "case 2",
 
-			expectedDisability: entity2.Regular,
-			expectedAuto:       entity2.Regular,
-			expectedLife:       entity2.Regular,
-			expectedHouse:      entity2.Regular,
+			expectedDisability: entity.Regular,
+			expectedAuto:       entity.Regular,
+			expectedLife:       entity.Regular,
+			expectedHouse:      entity.Regular,
 		},
 		{
 			age:           71,
 			dependents:    4,
-			houseStatus:   entity2.HsNotOwned,
+			houseStatus:   entity.HsNotOwned,
 			vehicleYear:   0,
 			income:        0,
-			maritalStatus: entity2.Married,
+			maritalStatus: entity.Married,
 			answers:       []bool{false, true, true},
 			name:          "case 3",
 
-			expectedDisability: entity2.Ineligible,
-			expectedAuto:       entity2.Ineligible,
-			expectedLife:       entity2.Ineligible,
-			expectedHouse:      entity2.Ineligible,
+			expectedDisability: entity.Ineligible,
+			expectedAuto:       entity.Ineligible,
+			expectedLife:       entity.Ineligible,
+			expectedHouse:      entity.Ineligible,
 		},
 		{
 			age:           27,
 			dependents:    0,
-			houseStatus:   entity2.HsOwned,
+			houseStatus:   entity.HsOwned,
 			vehicleYear:   time.Now().Year() - 5,
 			income:        21000000,
-			maritalStatus: entity2.Single,
+			maritalStatus: entity.Single,
 			answers:       []bool{true, false, false},
 			name:          "case 4",
 
-			expectedDisability: entity2.Economic,
-			expectedAuto:       entity2.Economic,
-			expectedLife:       entity2.Economic,
-			expectedHouse:      entity2.Economic,
+			expectedDisability: entity.Economic,
+			expectedAuto:       entity.Economic,
+			expectedLife:       entity.Economic,
+			expectedHouse:      entity.Economic,
 		},
 		{
 			age:           31,
 			dependents:    10,
-			houseStatus:   entity2.HsMortgaged,
+			houseStatus:   entity.HsMortgaged,
 			vehicleYear:   time.Now().Year() - 2,
 			income:        12000000,
-			maritalStatus: entity2.Married,
+			maritalStatus: entity.Married,
 			answers:       []bool{true, false, true},
 			name:          "case 5",
 
-			expectedDisability: entity2.Regular,
-			expectedAuto:       entity2.Regular,
-			expectedLife:       entity2.Responsible,
-			expectedHouse:      entity2.Regular,
+			expectedDisability: entity.Regular,
+			expectedAuto:       entity.Regular,
+			expectedLife:       entity.Responsible,
+			expectedHouse:      entity.Regular,
 		},
 		{
 			age:           46,
 			dependents:    0,
-			houseStatus:   entity2.HsNotOwned,
+			houseStatus:   entity.HsNotOwned,
 			vehicleYear:   0,
 			income:        0,
-			maritalStatus: entity2.Single,
+			maritalStatus: entity.Single,
 			answers:       []bool{true, true, false},
 			name:          "case 6",
 
-			expectedDisability: entity2.Ineligible,
-			expectedAuto:       entity2.Ineligible,
-			expectedLife:       entity2.Regular,
-			expectedHouse:      entity2.Ineligible,
+			expectedDisability: entity.Ineligible,
+			expectedAuto:       entity.Ineligible,
+			expectedLife:       entity.Regular,
+			expectedHouse:      entity.Ineligible,
 		},
 		{
 			age:           80,
 			dependents:    3,
-			houseStatus:   entity2.HsOwned,
+			houseStatus:   entity.HsOwned,
 			vehicleYear:   time.Now().Year() - 7,
 			income:        70000000,
-			maritalStatus: entity2.Married,
+			maritalStatus: entity.Married,
 			answers:       []bool{true, true, true},
 			name:          "case 7",
 
-			expectedDisability: entity2.Ineligible,
-			expectedAuto:       entity2.Regular,
-			expectedLife:       entity2.Ineligible,
-			expectedHouse:      entity2.Regular,
+			expectedDisability: entity.Ineligible,
+			expectedAuto:       entity.Regular,
+			expectedLife:       entity.Ineligible,
+			expectedHouse:      entity.Regular,
 		},
 	}
 
 	for _, c := range cases {
 		t.Run("should return the correct risk profile to all given user profiles "+c.name, func(t *testing.T) {
-			var vehicleStatus entity2.VehicleStatus
+			var vehicleStatus entity.VehicleStatus
 			if c.vehicleYear > 0 {
-				vehicleStatus = entity2.VsOwned
+				vehicleStatus = entity.VsOwned
 			}
 
-			userProfile := entity2.UserProfile{
+			userProfile := entity.UserProfile{
 				Age:        c.age,
 				Dependents: c.dependents,
-				HouseProfile: entity2.HouseProfile{
+				HouseProfile: entity.HouseProfile{
 					HouseStatus: c.houseStatus,
 				},
 				Income:        c.income,
 				MaritalStatus: c.maritalStatus,
-				RiskQuestions: []entity2.RiskQuestion{
+				RiskQuestions: []entity.RiskQuestion{
 					{
-						RiskQuestionType: entity2.RiskQuestion0,
+						RiskQuestionType: entity.RiskQuestion0,
 						Answer:           c.answers[0],
 					},
 					{
-						RiskQuestionType: entity2.RiskQuestion1,
+						RiskQuestionType: entity.RiskQuestion1,
 						Answer:           c.answers[1],
 					},
 					{
-						RiskQuestionType: entity2.RiskQuestion2,
+						RiskQuestionType: entity.RiskQuestion2,
 						Answer:           c.answers[2],
 					},
 				},
-				VehicleProfile: entity2.VehicleProfile{
+				VehicleProfile: entity.VehicleProfile{
 					VehicleStatus: vehicleStatus,
 					Year:          c.vehicleYear,
 				},

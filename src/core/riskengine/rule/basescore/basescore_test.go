@@ -1,7 +1,7 @@
 package basescore
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -58,28 +58,28 @@ func TestRule_Execute(t *testing.T) {
 	for _, c := range cases {
 		t.Run("should return the correct risk profile to all possible risk question answers - "+c.name, func(t *testing.T) {
 
-			userProfile := entity2.UserProfile{RiskQuestions: []entity2.RiskQuestion{
+			userProfile := entity.UserProfile{RiskQuestions: []entity.RiskQuestion{
 				{
-					RiskQuestionType: entity2.RiskQuestion0,
+					RiskQuestionType: entity.RiskQuestion0,
 					Answer:           c.answers[0],
 				},
 				{
-					RiskQuestionType: entity2.RiskQuestion1,
+					RiskQuestionType: entity.RiskQuestion1,
 					Answer:           c.answers[1],
 				},
 				{
-					RiskQuestionType: entity2.RiskQuestion2,
+					RiskQuestionType: entity.RiskQuestion2,
 					Answer:           c.answers[2],
 				},
 			}}
 
-			received := Rule{}.Execute(userProfile, entity2.RiskProfile{})
+			received := Rule{}.Execute(userProfile, entity.RiskProfile{})
 
-			expected := entity2.RiskProfile{
-				Disability: entity2.Risk{Value: c.expectedValue},
-				House:      entity2.Risk{Value: c.expectedValue},
-				Auto:       entity2.Risk{Value: c.expectedValue},
-				Life:       entity2.Risk{Value: c.expectedValue},
+			expected := entity.RiskProfile{
+				Disability: entity.Risk{Value: c.expectedValue},
+				House:      entity.Risk{Value: c.expectedValue},
+				Auto:       entity.Risk{Value: c.expectedValue},
+				Life:       entity.Risk{Value: c.expectedValue},
 			}
 
 			assert.Equal(t, expected, received)

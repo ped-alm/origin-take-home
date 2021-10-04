@@ -1,7 +1,7 @@
 package marital
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
 )
 
 type Rule struct{}
@@ -11,9 +11,9 @@ const (
 	maritalDeduct = -1
 )
 
-func (r Rule) Execute(userProfile entity2.UserProfile, riskProfile entity2.RiskProfile) entity2.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
-	if userProfile.MaritalStatus == entity2.Married {
+	if userProfile.MaritalStatus == entity.Married {
 		riskProfile.Life.Value += maritalAdd
 		riskProfile.Disability.Value += maritalDeduct
 	}

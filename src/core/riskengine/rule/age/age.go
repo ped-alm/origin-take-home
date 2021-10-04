@@ -1,7 +1,7 @@
 package age
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
 )
 
 type Rule struct{}
@@ -14,12 +14,12 @@ const (
 	averageDeduct = -1
 )
 
-func (r Rule) Execute(userProfile entity2.UserProfile, riskProfile entity2.RiskProfile) entity2.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	switch {
 	case userProfile.Age > oldAge:
-		riskProfile.Disability.Status = entity2.Ineligible
-		riskProfile.Life.Status = entity2.Ineligible
+		riskProfile.Disability.Status = entity.Ineligible
+		riskProfile.Life.Status = entity.Ineligible
 	case userProfile.Age < youngAge:
 		riskProfile.House.Value += youngDeduct
 		riskProfile.Auto.Value += youngDeduct

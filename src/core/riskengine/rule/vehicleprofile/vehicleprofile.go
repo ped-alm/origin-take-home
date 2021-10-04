@@ -1,7 +1,7 @@
 package vehicleprofile
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
 	"time"
 )
 
@@ -12,10 +12,10 @@ const (
 	newVehicleThreshold = 5
 )
 
-func (r Rule) Execute(userProfile entity2.UserProfile, riskProfile entity2.RiskProfile) entity2.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 	newThresholdYear := time.Now().Year() - newVehicleThreshold
 
-	if userProfile.VehicleProfile.VehicleStatus == entity2.VsOwned && userProfile.VehicleProfile.Year >= newThresholdYear {
+	if userProfile.VehicleProfile.VehicleStatus == entity.VsOwned && userProfile.VehicleProfile.Year >= newThresholdYear {
 		riskProfile.Auto.Value += newVehicleAdd
 	}
 

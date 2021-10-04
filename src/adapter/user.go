@@ -1,12 +1,12 @@
 package adapter
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
-	model2 "github.com/ped-alm/origin-take-home/src/infra/http/model"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/infra/http/model"
 )
 
-func UserProfileHttpToEntity(mUserProfile model2.UserProfile) entity2.UserProfile {
-	eUserProfile := entity2.UserProfile{
+func UserProfileHttpToEntity(mUserProfile model.UserProfile) entity.UserProfile {
+	eUserProfile := entity.UserProfile{
 		Age:        mUserProfile.Age,
 		Dependents: mUserProfile.Dependents,
 		Income:     mUserProfile.Income,
@@ -14,28 +14,28 @@ func UserProfileHttpToEntity(mUserProfile model2.UserProfile) entity2.UserProfil
 
 	switch mUserProfile.House.OwnershipStatus {
 	case "owned":
-		eUserProfile.HouseProfile.HouseStatus = entity2.HsOwned
+		eUserProfile.HouseProfile.HouseStatus = entity.HsOwned
 	case "mortgaged":
-		eUserProfile.HouseProfile.HouseStatus = entity2.HsMortgaged
+		eUserProfile.HouseProfile.HouseStatus = entity.HsMortgaged
 	}
 
 	switch mUserProfile.MaritalStatus {
 	case "single":
-		eUserProfile.MaritalStatus = entity2.Single
+		eUserProfile.MaritalStatus = entity.Single
 	case "married":
-		eUserProfile.MaritalStatus = entity2.Married
+		eUserProfile.MaritalStatus = entity.Married
 	}
 
 	for i, answer := range mUserProfile.RiskQuestions {
-		var riskQuestion entity2.RiskQuestion
+		var riskQuestion entity.RiskQuestion
 
 		switch i {
 		case 0:
-			riskQuestion.RiskQuestionType = entity2.RiskQuestion0
+			riskQuestion.RiskQuestionType = entity.RiskQuestion0
 		case 1:
-			riskQuestion.RiskQuestionType = entity2.RiskQuestion1
+			riskQuestion.RiskQuestionType = entity.RiskQuestion1
 		case 2:
-			riskQuestion.RiskQuestionType = entity2.RiskQuestion2
+			riskQuestion.RiskQuestionType = entity.RiskQuestion2
 		}
 
 		if answer == 0 {
@@ -48,15 +48,15 @@ func UserProfileHttpToEntity(mUserProfile model2.UserProfile) entity2.UserProfil
 	}
 
 	if mUserProfile.Vehicle.Year > 0 {
-		eUserProfile.VehicleProfile.VehicleStatus = entity2.VsOwned
+		eUserProfile.VehicleProfile.VehicleStatus = entity.VsOwned
 		eUserProfile.VehicleProfile.Year = mUserProfile.Vehicle.Year
 	}
 
 	return eUserProfile
 }
 
-func RiskProfileEntityToHttp(eRiskProfile entity2.RiskProfile) model2.RiskProfile {
-	var mRiskProfile model2.RiskProfile
+func RiskProfileEntityToHttp(eRiskProfile entity.RiskProfile) model.RiskProfile {
+	var mRiskProfile model.RiskProfile
 
 	mRiskProfile.Auto = riskStatusEntityToHttp(eRiskProfile.Auto.Status)
 	mRiskProfile.Life = riskStatusEntityToHttp(eRiskProfile.Life.Status)
@@ -66,15 +66,15 @@ func RiskProfileEntityToHttp(eRiskProfile entity2.RiskProfile) model2.RiskProfil
 	return mRiskProfile
 }
 
-func riskStatusEntityToHttp(status entity2.RiskStatus) string {
+func riskStatusEntityToHttp(status entity.RiskStatus) string {
 	switch status {
-	case entity2.Regular:
+	case entity.Regular:
 		return "regular"
-	case entity2.Responsible:
+	case entity.Responsible:
 		return "responsible"
-	case entity2.Ineligible:
+	case entity.Ineligible:
 		return "ineligible"
-	case entity2.Economic:
+	case entity.Economic:
 		return "economic"
 	default:
 		return ""

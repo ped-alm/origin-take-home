@@ -10,7 +10,7 @@ RUN go mod download
 
 COPY src ./src
 
-RUN go build -o /build src/cmd/api/main.go
+RUN go build -o /build src/cmd/gin-api/main.go
 
 EXPOSE 8080
 

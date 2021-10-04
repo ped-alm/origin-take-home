@@ -1,7 +1,7 @@
 package income
 
 import (
-	entity2 "github.com/ped-alm/origin-take-home/src/core/entity"
+	"github.com/ped-alm/origin-take-home/src/core/entity"
 )
 
 type Rule struct{}
@@ -11,7 +11,7 @@ const (
 	highIncomeDeduct = -1
 )
 
-func (r Rule) Execute(userProfile entity2.UserProfile, riskProfile entity2.RiskProfile) entity2.RiskProfile {
+func (r Rule) Execute(userProfile entity.UserProfile, riskProfile entity.RiskProfile) entity.RiskProfile {
 
 	if userProfile.Income > highIncome {
 		riskProfile.House.Value += highIncomeDeduct
